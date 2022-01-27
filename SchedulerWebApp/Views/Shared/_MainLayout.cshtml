@@ -1,4 +1,21 @@
-﻿<!DOCTYPE html>
+﻿@*@{
+        Layout = null;
+    }
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>_MainView</title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+    </html>*@
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -16,13 +33,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Appointment Scheduler", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Appointment Scheduler", "Index", "Main", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Main")</li> @*Update these three for different logged in views*@
+                    <li>@Html.ActionLink("About", "About", "Main")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Main")</li>
                 </ul>
             </div>
         </div>
