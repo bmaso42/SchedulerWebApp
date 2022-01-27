@@ -5,12 +5,13 @@ using System.Web;
 
 namespace SchedulerWebApp.Models
 {
-    public class Customer
+    public class Address
     {
-        public int customerID { get; set; }
-        public string customerName { get; set; }
         public int addressId { get; set; }
-        public bool active { get; set; }
+        public string address { get; set; }
+        public string address2 { get; set; }
+        public int postalCode { get; set; }
+        public int phone { get; set; }
         public DateTime createDate { get; set; }
         public string createdBy { get; set; }
         public DateTime lastUpdate { get; set; }
