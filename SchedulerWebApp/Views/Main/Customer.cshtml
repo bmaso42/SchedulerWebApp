@@ -1,0 +1,70 @@
+﻿@model IEnumerable<SchedulerWebApp.Models.CustomerModel>
+
+@{
+    ViewBag.Title = "Customer";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>CustomerView</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.customerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.addressId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.createDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.createdBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastUpdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastUpdateBy)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.customerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.addressId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.createDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.createdBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastUpdate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastUpdateBy)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.customerID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.customerID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.customerID })
+        </td>
+    </tr>
+}
+
+</table>

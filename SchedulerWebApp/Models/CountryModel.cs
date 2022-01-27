@@ -5,7 +5,7 @@ using System.Web;
 
 namespace SchedulerWebApp.Models
 {
-    public class Country
+    public class CountryModel
     {
         public int countryId { get; set; }
         public string country { get; set; }

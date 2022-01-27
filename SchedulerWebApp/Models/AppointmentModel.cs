@@ -5,7 +5,7 @@ using System.Web;
 
 namespace SchedulerWebApp.Models
 {
-    public class Appointment
+    public class AppointmentModel
     {
         public int appointmentId { get; set; }
         public int customerId { get; set; }
