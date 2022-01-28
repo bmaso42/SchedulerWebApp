@@ -42,14 +42,14 @@ namespace SchedulerWebApp.Database
             {
                 CustomerModel customerModel = new CustomerModel();
 
-                customerModel.customerID = AllCustomerReader.GetInt32(0);
-                customerModel.customerName = AllCustomerReader.GetString(1);
-                customerModel.addressId = AllCustomerReader.GetInt32(2);
-                customerModel.active = AllCustomerReader.GetBoolean(3);
-                customerModel.createDate = AllCustomerReader.GetDateTime(4);
-                customerModel.createdBy = AllCustomerReader.GetString(5);
-                customerModel.lastUpdate = AllCustomerReader.GetDateTime(6);
-                customerModel.lastUpdateBy = AllCustomerReader.GetString(7);
+                //customerModel.customerID = AllCustomerReader.GetInt32(0);
+                //customerModel.customerName = AllCustomerReader.GetString(1);
+                //customerModel.addressId = AllCustomerReader.GetInt32(2);
+                //customerModel.active = AllCustomerReader.GetBoolean(3);
+                //customerModel.createDate = AllCustomerReader.GetDateTime(4);
+                //customerModel.createdBy = AllCustomerReader.GetString(5);
+                //customerModel.lastUpdate = AllCustomerReader.GetDateTime(6);
+                //customerModel.lastUpdateBy = AllCustomerReader.GetString(7);
 
                 customerList.Add(customerModel);
             }

@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SchedulerWebApp.Database;
+using SchedulerWebApp.Models;
+using DataLibrary;
+using DataLibrary.BusinessLogic;
 
 namespace SchedulerWebApp.Controllers
 {
@@ -14,11 +17,50 @@ namespace SchedulerWebApp.Controllers
         {
             return View();
         }
-        public ActionResult Customer()
+        public ActionResult ViewCustomers()
         {
-            var db = new MySQLDataServices();
-            var customerList = db.GetAllCustomers();
-            return View(customerList);
+            ViewBag.Message = "List of Customers";
+
+            var data = CustomerProcessor.LoadCustomers();
+            List<CustomerModel> customers = new List<CustomerModel>();
+
+            foreach (var row in data)
+            {
+                customers.Add(new CustomerModel
+                {
+                    FirstName = row.FirstName,
+                    LastName = row.LastName,
+                    EmailAddress = row.EmailAddress,
+                    ConfirmEmail = row.EmailAddress
+                });
+            }
+
+            return View(customers);
+
+            //var db = new MySQLDataServices();
+            //var customerList = db.GetAllCustomers();
+            //return View(customerList);
+        }
+        public ActionResult CreateCustomer()
+        {
+            ViewBag.Message = "Create a New Customer";
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateCustomer(CustomerModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                int recordsCreated = CustomerProcessor.CreateCustomer(model.FirstName, 
+                    model.LastName, 
+                    model.EmailAddress);
+
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }
