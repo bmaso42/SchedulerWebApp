@@ -100,5 +100,39 @@ namespace SchedulerWebApp.Controllers
             }
             return View();
         }
+
+        public ActionResult DeleteCustomer(int id)
+        {
+            int SelectedIndex = id;
+            var data = CustomerProcessor.LoadCustomers();
+            List<CustomerModel> customers = new List<CustomerModel>();
+
+            CustomerModel selectedCustomer = new CustomerModel();
+            foreach (var row in data)
+            {
+                if (row.customerId == id)
+                {
+                    selectedCustomer.customerId = row.customerId;
+                    selectedCustomer.FirstName = row.FirstName;
+                    selectedCustomer.LastName = row.LastName;
+                    selectedCustomer.EmailAddress = row.EmailAddress;
+                    selectedCustomer.ConfirmEmail = row.EmailAddress;
+                }
+            }
+            return View(selectedCustomer);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteCustomer(int id, string first)
+        {
+            if (ModelState.IsValid)
+            {
+            int recordsDeleted = CustomerProcessor.DeleteCustomer(id);
+
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
     }
 }

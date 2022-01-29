@@ -41,6 +41,19 @@ namespace DataLibrary.BusinessLogic
 
             return MySqlDataAccess.SaveData(sql, data);
         }
+
+        public static int DeleteCustomer(int customer_ID)
+        {
+            CustomerModel data = new CustomerModel
+            {
+                customerId = customer_ID,
+                //FirstName = firstName
+            };
+
+            string sql = @"delete from customer where customerId = @customerId;";
+
+            return MySqlDataAccess.SaveData(sql, data);
+        }
         public static List<CustomerModel> LoadCustomers()
         {
             string sql = @"select * from customer;";

@@ -1,0 +1,69 @@
+﻿@model SchedulerWebApp.Models.CustomerModel
+
+@{
+    ViewBag.Title = "Delete Customer";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Delete Customer</h2>
+
+<h3>Are you sure you want to delete this customer?</h3>
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfirmEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConfirmEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.customerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customerId)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm("DeleteCustomer", "Main")) {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.customerId, new { @id = "id" })
+        @Html.HiddenFor(m => m.FirstName, new { @id = "first" })
+
+        <div class="form-group no-color">
+            @*<input type="hidden" name="model" value=model/>*@
+            @*<input type="hidden" name="firstName" value=model.FirstName/>*@
+            <input type="submit" value="Delete" class="btn btn-default"/> |
+            @Html.ActionLink("Back to List", "ViewCustomers")
+        </div>
+    }
+</div>

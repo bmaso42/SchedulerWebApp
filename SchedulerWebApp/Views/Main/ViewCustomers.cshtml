@@ -44,7 +44,7 @@
         <td>
             @Html.ActionLink("Edit", "EditCustomer", new { id=item.customerId }, null) |
             @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Delete", "DeleteCustomer", new { id=item.customerId })
         </td>
     </tr>
 }

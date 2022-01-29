@@ -25,6 +25,7 @@ namespace SchedulerWebApp.Models
         [Compare("EmailAddress", ErrorMessage ="The Email and Confirm Email Addresses must match.")]
         public string ConfirmEmail { get; set; }
         
+        //set to be invisible in ViewPage - don't want it to be seen by user, but required for Update/Delete logic
         public int customerId { get; set; }
     }
 }
