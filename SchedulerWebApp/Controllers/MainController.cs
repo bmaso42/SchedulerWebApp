@@ -28,6 +28,7 @@ namespace SchedulerWebApp.Controllers
             {
                 customers.Add(new CustomerModel
                 {
+                    customerId = row.customerId,
                     FirstName = row.FirstName,
                     LastName = row.LastName,
                     EmailAddress = row.EmailAddress,
@@ -56,6 +57,43 @@ namespace SchedulerWebApp.Controllers
             {
                 int recordsCreated = CustomerProcessor.CreateCustomer(model.FirstName, 
                     model.LastName, 
+                    model.EmailAddress);
+
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        public ActionResult EditCustomer(int id)
+        {
+            int SelectedIndex = id;
+            var data = CustomerProcessor.LoadCustomers();
+            List<CustomerModel> customers = new List<CustomerModel>();
+
+            CustomerModel selectedCustomer = new CustomerModel();//data.SingleOrDefault(x => x.customerId == selectedIndex)
+            foreach(var row in data)
+            {
+                if (row.customerId == id)
+                {
+                    selectedCustomer.customerId = row.customerId;
+                    selectedCustomer.FirstName = row.FirstName;
+                    selectedCustomer.LastName = row.LastName;
+                    selectedCustomer.EmailAddress = row.EmailAddress;
+                    selectedCustomer.ConfirmEmail = row.EmailAddress;
+                }
+            }
+            return View(selectedCustomer);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditCustomer(CustomerModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                int recordsCreated = CustomerProcessor.UpdateCustomer(model.customerId,
+                    model.FirstName,
+                    model.LastName,
                     model.EmailAddress);
 
                 return RedirectToAction("Index");

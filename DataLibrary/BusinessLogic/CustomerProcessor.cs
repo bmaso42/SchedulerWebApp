@@ -25,12 +25,29 @@ namespace DataLibrary.BusinessLogic
 
             return MySqlDataAccess.SaveData(sql, data);
         }
+
+        public static int UpdateCustomer(int customer_ID, string firstName, string lastName, string emailAddress)
+        {
+            CustomerModel data = new CustomerModel
+            {
+                customerId = customer_ID,
+                FirstName = firstName,
+                LastName = lastName,
+                EmailAddress = emailAddress
+            };
+
+            string sql = @"Update customer set Firstname = @FirstName, LastName = @LastName, EmailAddress = @EmailAddress
+                            WHERE customerId = @customerId;";
+
+            return MySqlDataAccess.SaveData(sql, data);
+        }
         public static List<CustomerModel> LoadCustomers()
         {
             string sql = @"select * from customer;";
 
             return MySqlDataAccess.LoadData<CustomerModel>(sql);
         }
+
     }
     
 }

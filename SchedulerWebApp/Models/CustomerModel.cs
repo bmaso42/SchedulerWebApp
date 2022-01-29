@@ -25,5 +25,6 @@ namespace SchedulerWebApp.Models
         [Compare("EmailAddress", ErrorMessage ="The Email and Confirm Email Addresses must match.")]
         public string ConfirmEmail { get; set; }
         
+        public int customerId { get; set; }
     }
 }
