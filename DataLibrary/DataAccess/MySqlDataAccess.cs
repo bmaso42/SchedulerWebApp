@@ -33,5 +33,18 @@ namespace DataLibrary.DataAccess
                 return cnn.Execute(sql, data);
             }
         }
+
+        public static DataTable GetDataTable(string sql)
+        {
+            MySqlConnection con = new MySqlConnection(GetConnectionString());
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+            MySqlCommand cmd = new MySqlCommand(sql);
+            DataTable getdatatable = new DataTable();
+
+            adapter.SelectCommand = cmd;
+            adapter.SelectCommand.Connection = con;
+            adapter.Fill(getdatatable);
+            return getdatatable;
+        }
     }
 }

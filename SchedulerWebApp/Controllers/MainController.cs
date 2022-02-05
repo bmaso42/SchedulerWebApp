@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using SchedulerWebApp.Database;
 using SchedulerWebApp.Models;
 using DataLibrary;
 using DataLibrary.BusinessLogic;
+using System.Data;
 
 namespace SchedulerWebApp.Controllers
 {
@@ -134,6 +136,7 @@ namespace SchedulerWebApp.Controllers
         public ActionResult ViewAppointments()
         {
             ViewBag.Message = "List of Appointments";
+            ViewBag.CustomerList = CustomerProcessor.CustomerList();
 
             var data = CustomerProcessor.LoadAppointments();
             List<AppointmentModel> appointments = new List<AppointmentModel>();
@@ -153,6 +156,23 @@ namespace SchedulerWebApp.Controllers
             }
 
             return View(appointments);
+        }
+
+        [NonAction]
+        public SelectList ToSelectList(DataTable table, string valueField, string textField)
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+
+            foreach (DataRow row in table.Rows)
+            {
+                list.Add(new SelectListItem()
+                {
+                    Text = row[textField].ToString(),
+                    Value = row[valueField].ToString()
+                });
+            }
+
+            return new SelectList(list, "Value", "Text");
         }
 
         public ActionResult CreateAppointment()

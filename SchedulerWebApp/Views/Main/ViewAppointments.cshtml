@@ -38,8 +38,11 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.AppointmentID)
+        </td>*@
+        <td>
+            @Html.DropDownListFor(model => model., new SelectList(ViewBag.CustomerList)) @*Dude, no idea*@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CustomerID)

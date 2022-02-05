@@ -2,6 +2,7 @@
 using DataLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -89,6 +90,12 @@ namespace DataLibrary.BusinessLogic
                             on a.customerId = b.customerId;";
 
             return MySqlDataAccess.LoadData<AppointmentModel>(sql);
+        }
+        public static DataTable CustomerList()
+        {
+            string sql = "string";
+
+            return MySqlDataAccess.GetDataTable(sql);
         }
     }
     

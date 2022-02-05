@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,23 +8,21 @@ namespace SchedulerWebApp.Models
 {
     public class AppointmentModel
     {
+        //set to be invisible in ViewPage - don't want it seen by user, but required for Update/Delete logic
         public int AppointmentID{ get; set; }
+
+        [Display(Name = "Customer ID")]
         public int CustomerID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        
+        [Display(Name = "Appointment Type")]
         public string Type { get; set; }
+
+        [Display(Name = "Appointment Start")]
         public DateTime Start { get; set; }
+
+        [Display(Name = "Appointment End")]
         public DateTime End { get; set; }
-        //public string title { get; set; }
-        //public string description { get; set; }
-        //public string location { get; set; }
-        //public string contact { get; set; }
-        //public string url { get; set; }
-
-        //public DateTime createDate { get; set; }
-        //public string createdBy { get; set; }
-        //public DateTime lastUpdate { get; set; }
-        //public string lastUpdateBy { get; set; }
-
     }
 }
