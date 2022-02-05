@@ -37,10 +37,6 @@ namespace SchedulerWebApp.Controllers
             }
 
             return View(customers);
-
-            //var db = new MySQLDataServices();
-            //var customerList = db.GetAllCustomers();
-            //return View(customerList);
         }
         public ActionResult CreateCustomer()
         {
@@ -132,6 +128,55 @@ namespace SchedulerWebApp.Controllers
                 return RedirectToAction("Index");
             }
 
+            return View();
+        }
+        
+        public ActionResult ViewAppointments()
+        {
+            ViewBag.Message = "List of Appointments";
+
+            var data = CustomerProcessor.LoadAppointments();
+            List<AppointmentModel> appointments = new List<AppointmentModel>();
+
+            foreach (var row in data)
+            {
+                appointments.Add(new AppointmentModel
+                {
+                    AppointmentID = row.AppointmentID,
+                    CustomerID = row.CustomerID,
+                    FirstName = row.FirstName,
+                    LastName = row.LastName,
+                    Type = row.Type,
+                    Start = row.Start,
+                    End = row.End
+                });
+            }
+
+            return View(appointments);
+        }
+
+        public ActionResult CreateAppointment()
+        {
+            ViewBag.Message = "Create a New Appointment";
+
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateAppointment(AppointmentModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                int recordsCreated = CustomerProcessor.CreateAppointment(
+                    model.CustomerID,
+                    model.FirstName,
+                    model.LastName,
+                    model.Type,
+                    model.Start,
+                    model.End);
+
+                return RedirectToAction("ViewAppointments");
+            }
             return View();
         }
     }

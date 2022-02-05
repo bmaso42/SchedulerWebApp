@@ -127,6 +127,7 @@
   <ItemGroup>
     <Compile Include="BusinessLogic\CustomerProcessor.cs" />
     <Compile Include="DataAccess\MySqlDataAccess.cs" />
+    <Compile Include="Models\AppointmentModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

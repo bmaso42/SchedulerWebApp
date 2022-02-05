@@ -54,6 +54,26 @@ namespace DataLibrary.BusinessLogic
 
             return MySqlDataAccess.SaveData(sql, data);
         }
+
+        public static int CreateAppointment(/*int AppointmentID*/int CustomerID, string FirstName, string LastName, string Type, DateTime Start, DateTime End)
+        {
+            AppointmentModel data = new AppointmentModel
+            {
+                //AppointmentID = AppointmentID,
+                CustomerID = CustomerID,
+                FirstName = FirstName,
+                LastName = LastName,
+                Type = Type,
+                Start = Start,
+                End = End
+            };
+
+            string sql = @"Insert into appointment (CustomerID, FirstName, LastName, Type, Start, End)
+                          values (@CustomerID, @FirstName, @LastName, @Type, @Start, @End);";
+
+            return MySqlDataAccess.SaveData(sql, data);
+        }
+
         public static List<CustomerModel> LoadCustomers()
         {
             string sql = @"select * from customer;";
@@ -61,6 +81,15 @@ namespace DataLibrary.BusinessLogic
             return MySqlDataAccess.LoadData<CustomerModel>(sql);
         }
 
+        public static List<AppointmentModel> LoadAppointments()
+        {
+            string sql = @"SELECT a.appointmentId, a.customerId, b.FirstName, b.LastName, a.type, a.start, a.end
+                            FROM appointment as a
+                            INNER JOIN customer as b
+                            on a.customerId = b.customerId;";
+
+            return MySqlDataAccess.LoadData<AppointmentModel>(sql);
+        }
     }
     
 }

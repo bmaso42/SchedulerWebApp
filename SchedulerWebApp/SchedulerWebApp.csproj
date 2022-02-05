@@ -241,6 +241,8 @@
     <Content Include="Views\Main\ViewCustomers.cshtml" />
     <Content Include="Views\Main\EditCustomer.cshtml" />
     <Content Include="Views\Main\DeleteCustomer.cshtml" />
+    <Content Include="Views\Main\ViewAppointments.cshtml" />
+    <Content Include="Views\Main\CreateAppointment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
