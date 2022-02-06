@@ -149,11 +149,13 @@ namespace SchedulerWebApp.Controllers
                     CustomerID = row.CustomerID,
                     FirstName = row.FirstName,
                     LastName = row.LastName,
+                    FullName = row.FirstName + " " + row.LastName, //concat field to use for dropdown along with CustomerID
                     Type = row.Type,
                     Start = row.Start,
                     End = row.End
                 });
             }
+
 
             return View(appointments);
         }

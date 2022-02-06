@@ -93,7 +93,7 @@ namespace DataLibrary.BusinessLogic
         }
         public static DataTable CustomerList()
         {
-            string sql = "string";
+            string sql = "select customerId, FirstName, LastName from customer;";
 
             return MySqlDataAccess.GetDataTable(sql);
         }
