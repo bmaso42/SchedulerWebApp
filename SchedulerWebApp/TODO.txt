@@ -1,3 +1,7 @@
 TODO 
 MySqlDataAccess GetConnectionString() does not pull from Web.config
     currently hard coded the connection string as workaround
+
+https://xdsoft.net/jqplugins/datetimepicker/
+https://stackoverflow.com/questions/62049179/how-to-use-datepicker-on-mvc-core-in-asp-form
+    Use these links to implement datetimepicker

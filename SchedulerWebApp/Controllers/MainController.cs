@@ -161,7 +161,7 @@ namespace SchedulerWebApp.Controllers
         }
 
         [NonAction]
-        public SelectList ToSelectList(DataTable table, string valueField, string textField)
+        public SelectList ToSelectList(DataTable table/*, string valueField, string textField*/) //helper function to combine first+last name from datatable, used to populate dropdownlist
         {
             List<SelectListItem> list = new List<SelectListItem>();
 
@@ -169,9 +169,9 @@ namespace SchedulerWebApp.Controllers
             {
                 list.Add(new SelectListItem()
                 {
-                    Text = row[textField].ToString(),
-                    Value = row[valueField].ToString()
-                });
+                    Text = row[0].ToString(),
+                    Value = row[1].ToString() + " " + row[2].ToString()
+                }); ;
             }
 
             return new SelectList(list, "Value", "Text");
@@ -180,6 +180,13 @@ namespace SchedulerWebApp.Controllers
         public ActionResult CreateAppointment()
         {
             ViewBag.Message = "Create a New Appointment";
+            ViewBag.CustomerList = ToSelectList(CustomerProcessor.CustomerList());
+            //DataTable dt = CustomerProcessor.CustomerList();
+            //SelectList SelectCustomerList;// = new SelectList;
+            //foreach (DataRow row in dt.Rows)
+            //{
+
+            //}
 
             return View();
         }

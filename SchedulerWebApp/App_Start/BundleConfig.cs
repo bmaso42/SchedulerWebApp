@@ -25,6 +25,12 @@ namespace SchedulerWebApp
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/datetimepicker").Include(
+                       "~/Scripts/jquery.datetimepicker.js"));
+
+            bundles.Add(new StyleBundle("~/Content/datetimepicker").Include(
+                        "~/Content/jquery.datetimepicker.css"));
         }
     }
 }
