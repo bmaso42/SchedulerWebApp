@@ -5,3 +5,11 @@ MySqlDataAccess GetConnectionString() does not pull from Web.config
 https://xdsoft.net/jqplugins/datetimepicker/
 https://stackoverflow.com/questions/62049179/how-to-use-datepicker-on-mvc-core-in-asp-form
     Use these links to implement datetimepicker
+
+CreateAppointment.cshtml script starting on line 143
+    close!
+    (in picker HTML) - set default datetime to today's date 8am for start, end time for 5pm for end
+
+    in script - 
+        make date update one another upon select (possibly in onChangeDateTime function)
+        make time update to set min/max of the other upon select
