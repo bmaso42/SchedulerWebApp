@@ -76,15 +76,15 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <!--<div class="form-group">
             @Html.LabelFor(model => model.End, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10">-->
                 @*@Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })*@
-                <input asp-for="End" id="datetimepicker_end" type="text" class="form-control" @*value="@DateTime.Now.ToString("yyyy-MM-dd hh:mm")"*@ />
+                <!--<input asp-for="End" id="datetimepicker_end" type="text" class="form-control"--> @*value="@DateTime.Now.ToString("yyyy-MM-dd hh:mm")"*@ <!--/>
                 <span asp-validation-for="End" class="text-danger"></span>
             </div>
-        </div>
+        </div>-->
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -105,7 +105,7 @@
 
 
     @*<script src="~/Scripts/jquery.datetimepicker.js"></script>*@
-    @*<script>
+    <script>
         $(function () {
             $("#datetimepicker_start").datetimepicker({
                 onGenerate: function (ct) {
@@ -114,15 +114,23 @@
                 },
                 onShow: function (ct) {
                     this.setOptions({
-                        maxDate: jQuery('datetimepicker_end').val() ? jQuery('datetimepicker_end'):false
+                        minDate: 0
+                        //minDate: 1//,
+                        //minTime: 0
+                    //    maxDate: jQuery('datetimepicker_end').val() ? jQuery('datetimepicker_end'):false
                     })
                 },
+                onChangeDateTime: function () {
+
+                },
                 weekends: ['01.01.2014', '02.01.2014', '03.01.2014', '04.01.2014', '05.01.2014', '06.01.2014'],
-                timepicker: true
+                allowTimes: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
+                timepicker: true,
+                timepickerScrollbar: false
             });
         });
     </script>
-    <script>
+    @*<script>
         $(function () {
             $("#datetimepicker_end").datetimepicker({
                 onGenerate: function (ct) {
@@ -140,10 +148,10 @@
             });
         });
     </script>*@
-    <script>
+    <!--<script>-->
         @*const { start } = require("@popperjs/core");*@
 
-        $(function () {
+        <!--$(function () {
             /**
              * we declare a variable here so that we can use it within both our datepicker onChangeDateTime functions
              * this var will hold the time of delivery + 1hour and will be used in the collection picker when both delivery and collection dates are the same
@@ -225,7 +233,7 @@
             }); //End of collection datepicker
 
         });
-    </script>
+    </script>-->
     
 
 }
