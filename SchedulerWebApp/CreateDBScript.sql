@@ -1,4 +1,4 @@
-
+use client_schedule;
 --
 -- Script to drop prior tables 
 --

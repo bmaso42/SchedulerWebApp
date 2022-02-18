@@ -1,0 +1,12 @@
+SELECT suppliers.supplier_id, suppliers.supplier_name, orders.order_date
+FROM suppliers 
+INNER JOIN orders
+ON suppliers.supplier_id = orders.supplier_id;
+
+SELECT a.appointmentId, a.customerId, b.FirstName, b.LastName, a.userId, a.type, a.start, a.end
+FROM appointment as a
+INNER JOIN customer as b
+on a.customerId = b.customerId;
+
+alter table appointment
+drop column userId;

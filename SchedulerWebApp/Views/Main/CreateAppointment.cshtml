@@ -69,19 +69,21 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+                @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control date-picker" } })
                 @*@Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })*@
-                <input asp-for="Start" id="datetimepicker_start" type="text" class="form-control" @*value="@DateTime.Now.ToString("yyyy-MM-dd hh:mm")"*@ />
-                <span asp-validation-for="Start" class="text-danger"></span>
+        @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })*@
+                @*<input asp-for="Start" id="date-picker" type="text" class="form-control" , onkeydown="return false" , onpaste="return false" />
+        <span asp-validation-for="Start" class="text-danger"></span>*@
             </div>
         </div>
 
         <!--<div class="form-group">
             @Html.LabelFor(model => model.End, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">-->
-                @*@Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })*@
-                <!--<input asp-for="End" id="datetimepicker_end" type="text" class="form-control"--> @*value="@DateTime.Now.ToString("yyyy-MM-dd hh:mm")"*@ <!--/>
+        @*@Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })*@
+        <!--<input asp-for="End" id="datetimepicker_end" type="text" class="form-control"--> @*value="@DateTime.Now.ToString("yyyy-MM-dd hh:mm")"*@
+        <!--/>
                 <span asp-validation-for="End" class="text-danger"></span>
             </div>
         </div>-->
@@ -98,60 +100,107 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-<link rel="stylesheet" type="text/css" href="/jquery.datetimepicker.css" />
+@*<link rel="stylesheet" type="text/css" href="/jquery.datetimepicker.css" />*@
+
+<link href="~/Content/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-timepicker-addon.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(function () {
+                $("date-picker").datetimepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "-100:+0",
+                    dateFormat: 'dd-M-yy',
+                    controlType: 'select',
+                    timeFormat: 'hh:mm TT'
+                });
+
+            });
+
+            jQuery.validator.methods.date = function (value, element) {
+                var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+                if (isChrome) {
+                    var d = new Date();
+                    return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+                } else {
+                    return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+                }
+            };
+
+        });
+
+    </script>
 
     @*<script src="~/Scripts/jquery.datetimepicker.js"></script>*@
-    <script>
-        $(function () {
-            $("#datetimepicker_start").datetimepicker({
-                onGenerate: function (ct) {
-                    jQuery(this).find('.xdsoft_date.xdsoft_weekend')
-                        .addClass('xdsoft_disabled');
-                },
-                onShow: function (ct) {
-                    this.setOptions({
-                        minDate: 0
-                        //minDate: 1//,
-                        //minTime: 0
-                    //    maxDate: jQuery('datetimepicker_end').val() ? jQuery('datetimepicker_end'):false
-                    })
-                },
-                onChangeDateTime: function () {
-
-                },
-                weekends: ['01.01.2014', '02.01.2014', '03.01.2014', '04.01.2014', '05.01.2014', '06.01.2014'],
-                allowTimes: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
-                timepicker: true,
-                timepickerScrollbar: false
-            });
-        });
-    </script>
     @*<script>
-        $(function () {
-            $("#datetimepicker_end").datetimepicker({
-                onGenerate: function (ct) {
-                    jQuery(this).find('.xdsoft_date.xdsoft_weekend')
-                        .addClass('xdsoft_disabled');
-                },
-                onShow: function (ct) {
-                    this.setOptions({
-                        minDate: jQuery('datetimepicker_start').val() ? jQuery('datetimepicker_start') : false
-                    })
-                },
-                weekends: ['01.01.2014', '02.01.2014', '03.01.2014', '04.01.2014', '05.01.2014', '06.01.2014'],
-                timepicker: true,
-                timepickerScrollbar:false
-            });
-        });
-    </script>*@
-    <!--<script>-->
-        @*const { start } = require("@popperjs/core");*@
+            var setStartTime = function (currentDateTime) {
 
-        <!--$(function () {
+            };
+            $(function () {
+                $("#datetimepicker_start").datetimepicker({
+                    onGenerate: function (ct) {
+                        jQuery(this).find('.xdsoft_date.xdsoft_weekend')
+                            .addClass('xdsoft_disabled');
+
+                    },
+                    onShow: function (ct) {
+                        this.setOptions({
+                            minDate: 0
+                        })
+                    },
+                    onChangeDateTime: function (ct) {
+                        this.setOptions({
+                            roundTime: 'ceil',
+                            autoclose: false
+                        })
+                    },
+                    //onChangeDateTime: function (dp, $input) {
+                    //    let startDate = $("#datetimepicker_start").val();
+                    //    if (startDate != minDate) {
+                    //        this.setOptions({
+                    //            minTime: '08:00'
+                    //        })
+                    //    }
+                    //},
+
+                    weekends: ['01.01.2014', '02.01.2014', '03.01.2014', '04.01.2014', '05.01.2014', '06.01.2014'],
+                    allowTimes: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
+                    timepicker: true,
+                    timepickerScrollbar: false
+                });
+            });
+        </script>*@
+    @*<script>
+            $(function () {
+                $("#datetimepicker_end").datetimepicker({
+                    onGenerate: function (ct) {
+                        jQuery(this).find('.xdsoft_date.xdsoft_weekend')
+                            .addClass('xdsoft_disabled');
+                    },
+                    onShow: function (ct) {
+                        this.setOptions({
+                            minDate: jQuery('datetimepicker_start').val() ? jQuery('datetimepicker_start') : false
+                        })
+                    },
+                    weekends: ['01.01.2014', '02.01.2014', '03.01.2014', '04.01.2014', '05.01.2014', '06.01.2014'],
+                    timepicker: true,
+                    timepickerScrollbar:false
+                });
+            });
+        </script>*@
+    <!--<script>-->
+    @*const { start } = require("@popperjs/core");*@
+
+    <!--$(function () {
             /**
              * we declare a variable here so that we can use it within both our datepicker onChangeDateTime functions
              * this var will hold the time of delivery + 1hour and will be used in the collection picker when both delivery and collection dates are the same
@@ -234,6 +283,6 @@
 
         });
     </script>-->
-    
+
 
 }
