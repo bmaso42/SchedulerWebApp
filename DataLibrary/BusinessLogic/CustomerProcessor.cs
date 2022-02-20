@@ -56,21 +56,41 @@ namespace DataLibrary.BusinessLogic
             return MySqlDataAccess.SaveData(sql, data);
         }
 
-        public static int CreateAppointment(/*int AppointmentID*/int CustomerID, string FirstName, string LastName, string Type, DateTime Start, DateTime End)
+        public static int CreateAppointment(int CustomerID, /*string FirstName, string LastName,*/ DateTime Start)
+        ///*int AppointmentID*/int CustomerID, string FirstName, string LastName, string Type, DateTime Start, DateTime End)
         {
             AppointmentModel data = new AppointmentModel
             {
                 //AppointmentID = AppointmentID,
                 CustomerID = CustomerID,
-                FirstName = FirstName,
-                LastName = LastName,
-                Type = Type,
+                //FirstName = FirstName,
+                //LastName = LastName,
+                //Type = null,
                 Start = Start,
-                End = End
+                //End = End
             };
 
-            string sql = @"Insert into appointment (CustomerID, FirstName, LastName, Type, Start, End)
-                          values (@CustomerID, @FirstName, @LastName, @Type, @Start, @End);";
+            string sql = @"Insert into appointment (CustomerID, Start)
+                          values (@CustomerID, @Start);";
+
+            //@"Insert into appointment (CustomerID, FirstName, LastName, Start)
+            //              values (@CustomerID, @FirstName, @LastName, @Start);";
+
+            //@"Insert into appointment (CustomerID, FirstName, LastName, Type, Start, End)
+            //              values (@CustomerID, @FirstName, @LastName, @Type, @Start, @End);";
+
+            return MySqlDataAccess.SaveData(sql, data);
+        }
+
+        public static int DeleteAppointment(int appointment_ID)
+        {
+            AppointmentModel data = new AppointmentModel
+            {
+                AppointmentID = appointment_ID
+                //FirstName = firstName
+            };
+
+            string sql = @"delete from appointment where appointmentId = @AppointmentID;";
 
             return MySqlDataAccess.SaveData(sql, data);
         }
@@ -84,10 +104,15 @@ namespace DataLibrary.BusinessLogic
 
         public static List<AppointmentModel> LoadAppointments()
         {
-            string sql = @"SELECT a.appointmentId, a.customerId, b.FirstName, b.LastName, a.type, a.start, a.end
+            string sql = @"SELECT a.appointmentId, a.customerId, b.FirstName, b.LastName, a.start
                             FROM appointment as a
                             INNER JOIN customer as b
                             on a.customerId = b.customerId;";
+
+            //@"SELECT a.appointmentId, a.customerId, b.FirstName, b.LastName, a.type, a.start, a.end
+            //                FROM appointment as a
+            //                INNER JOIN customer as b
+            //                on a.customerId = b.customerId;";
 
             return MySqlDataAccess.LoadData<AppointmentModel>(sql);
         }

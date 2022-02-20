@@ -150,9 +150,9 @@ namespace SchedulerWebApp.Controllers
                     FirstName = row.FirstName,
                     LastName = row.LastName,
                     FullName = row.FirstName + " " + row.LastName, //concat field to use for dropdown along with CustomerID
-                    Type = row.Type,
-                    Start = row.Start,
-                    End = row.End
+                    //Type = row.Type,
+                    Start = row.Start
+                    //End = row.End
                 });
             }
 
@@ -198,14 +198,48 @@ namespace SchedulerWebApp.Controllers
             {
                 int recordsCreated = CustomerProcessor.CreateAppointment(
                     model.CustomerID,
-                    model.FirstName,
-                    model.LastName,
-                    model.Type,
-                    model.Start,
-                    model.End);
+                    //model.FirstName = null,
+                    //model.LastName = null,
+                    //model.Type = null,
+                    model.Start
+                    /*model.End*/);
 
                 return RedirectToAction("ViewAppointments");
             }
+            return View();
+        }
+
+        public ActionResult DeleteAppointment(int id)
+        {
+            int SelectedIndex = id;
+            var data = CustomerProcessor.LoadAppointments();
+            List<AppointmentModel> appointments = new List<AppointmentModel>();
+
+            AppointmentModel selectedAppointment = new AppointmentModel();
+            foreach (var row in data)
+            {
+                if (row.AppointmentID == id)
+                {
+                    selectedAppointment.AppointmentID = row.AppointmentID;
+                    //selectedAppointment.FirstName = row.FirstName;
+                    //selectedAppointment.LastName = row.LastName;
+                    selectedAppointment.CustomerID = row.CustomerID;
+                    selectedAppointment.Start= row.Start;
+                }
+            }
+            return View(selectedAppointment);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAppointment(int id, string first)
+        {
+            if (ModelState.IsValid)
+            {
+                int recordsDeleted = CustomerProcessor.DeleteAppointment(id);
+
+                return RedirectToAction("ViewAppointments");
+            }
+
             return View();
         }
     }
