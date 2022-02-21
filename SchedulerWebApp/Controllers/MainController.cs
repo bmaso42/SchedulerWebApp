@@ -214,6 +214,7 @@ namespace SchedulerWebApp.Controllers
             int SelectedIndex = id;
             var data = CustomerProcessor.LoadAppointments();
             List<AppointmentModel> appointments = new List<AppointmentModel>();
+            SelectList customerNames = ToSelectList(CustomerProcessor.CustomerList());
 
             AppointmentModel selectedAppointment = new AppointmentModel();
             foreach (var row in data)
@@ -224,6 +225,9 @@ namespace SchedulerWebApp.Controllers
                     //selectedAppointment.FirstName = row.FirstName;
                     //selectedAppointment.LastName = row.LastName;
                     selectedAppointment.CustomerID = row.CustomerID;
+
+                    selectedAppointment.FullName = row.FirstName + " " + row.LastName;
+                    
                     selectedAppointment.Start= row.Start;
                 }
             }
