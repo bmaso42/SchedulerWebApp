@@ -246,5 +246,28 @@ namespace SchedulerWebApp.Controllers
 
             return View();
         }
+
+        public ActionResult EditAppointment(int id)
+        {
+            ViewBag.CustomerList = ToSelectList(CustomerProcessor.CustomerList());
+
+            int SelectedIndex = id;
+            var data = CustomerProcessor.LoadAppointments();
+            List<AppointmentModel> appointments = new List<AppointmentModel>();
+
+            AppointmentModel selectedAppointment = new AppointmentModel();//data.SingleOrDefault(x => x.customerId == selectedIndex)
+            foreach (var row in data)
+            {
+                if (row.AppointmentID == id)
+                {
+                    selectedAppointment.CustomerID = row.CustomerID;
+                    selectedAppointment.FirstName = row.FirstName;
+                    selectedAppointment.LastName = row.LastName;
+                    selectedAppointment.Start = row.Start;
+                    //selectedAppointment.ConfirmEmail = row.EmailAddress;
+                }
+            }
+            return View(selectedAppointment);
+        }
     }
 }
