@@ -19,3 +19,5 @@ CreateAppointment.cshtml script starting on line 143
             if selected date is today, mintime is 0 (now).
             if selected date is after today, mintime is 08:00
             apply script in onChangeDateTime in current datetimepicker_start function (line 123)
+
+
