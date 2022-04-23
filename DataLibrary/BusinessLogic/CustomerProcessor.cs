@@ -81,6 +81,25 @@ namespace DataLibrary.BusinessLogic
 
             return MySqlDataAccess.SaveData(sql, data);
         }
+        public static int UpdateAppointment(int AppointmentID, int CustomerID, DateTime Start)
+        {
+            AppointmentModel data = new AppointmentModel
+            {
+                AppointmentID = AppointmentID,
+                CustomerID = CustomerID,
+                //FirstName = FirstName,
+                //LastName = LastName,
+                //Type = null,
+                Start = Start,
+                //End = End
+            };
+
+            string sql = @"update appointment set customerID = @CustomerID, start = @Start WHERE appointmentID = @AppointmentID";
+            //@"Update customer set Firstname = @FirstName, LastName = @LastName, EmailAddress = @EmailAddress
+            //                WHERE customerId = @customerId;"
+
+            return MySqlDataAccess.SaveData(sql, data);
+        }
 
         public static int DeleteAppointment(int appointment_ID)
         {

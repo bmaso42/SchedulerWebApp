@@ -260,6 +260,7 @@ namespace SchedulerWebApp.Controllers
             {
                 if (row.AppointmentID == id)
                 {
+                    selectedAppointment.AppointmentID = row.AppointmentID;
                     selectedAppointment.CustomerID = row.CustomerID;
                     selectedAppointment.FirstName = row.FirstName;
                     selectedAppointment.LastName = row.LastName;
@@ -268,6 +269,25 @@ namespace SchedulerWebApp.Controllers
                 }
             }
             return View(selectedAppointment);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditAppointment(AppointmentModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                int recordsCreated = CustomerProcessor.UpdateAppointment(
+                    model.AppointmentID,
+                    model.CustomerID,
+                    //model.FirstName = null,
+                    //model.LastName = null,
+                    //model.Type = null,
+                    model.Start
+                    /*model.End*/);
+
+                return RedirectToAction("ViewAppointments");
+            }
+            return View();
         }
     }
 }
