@@ -21,3 +21,6 @@ CreateAppointment.cshtml script starting on line 143
             apply script in onChangeDateTime in current datetimepicker_start function (line 123)
 
 
+in a way she did. like an animal,
+she could feel danger in her bones before anyone else in the room
+perhaps she was magic, or perhaps that's what happens when you live in a world where monsters are real
