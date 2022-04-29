@@ -17,13 +17,6 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.AppointmentID, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.AppointmentID, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.AppointmentID, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.CustomerID, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -34,38 +27,6 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
         <div class="form-group">
             @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -74,16 +35,6 @@
                 <!--<input asp-for="Start" id="Start" type="text" class="form-control" autocomplete="off"--> @*value="@DateTime.Now.ToString("yyyy-MM-dd hh:mm")"*@ <!--/>
                 <span asp-validation-for="Start" class="text-danger"></span>-->
             </div>
-        </div>
-
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.End, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">*@
-                @*@Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })*@
-                <!--<input asp-for="End" id="datetimepicker_end" type="text" class="form-control"--> @*value="@DateTime.Now.ToString("yyyy-MM-dd hh:mm")"*@ <!--/>
-                <span asp-validation-for="End" class="text-danger"></span>
-            </div>-->
         </div>
 
         <div class="form-group">
@@ -106,67 +57,19 @@
 
     <script>
         $(function () {
-            //let tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
             $("#Start").datetimepicker({
                 //format: 'd/m/Y H:i',
-                //lang:'en',
                 closeOnWithoutClick: false,
                 closeOnDateSelect: false,
                 validateOnBlur: false,
                 minDate: '-1969/12/31',
                 defaultTime: '08:00',
-                //startDate: '+1970/01/02',
 
                 onGenerate: function (ct) {
                     jQuery(this).find('.xdsoft_date.xdsoft_weekend')
                         .addClass('xdsoft_disabled');
                 },
-                //onShow: function (ct) {
-                //    this.setOptions({
-                //        minDate: '+1970/01/03'
-                //        //minDate: 1//,
-                //        //minTime: 0
-                //    //    maxDate: jQuery('datetimepicker_end').val() ? jQuery('datetimepicker_end'):false
-                //    })
-                //},
                 
-                //onChangeDateTime: function () {
-                //    function checkTime(dt = new Date()) {
-
-                //        console.log(dt); //Tue Apr 26 2022 16:50:25 GMT-0400 (Eastern Daylight Time)
-
-                //        console.log(dt.getDay()) // 2
-
-                //        console.log(typeof (dt.getDay())) // number
-
-                //        console.log(dt.getTime()) // 1651006283236
-
-
-
-                //        if ((0 < dt.getDay()) && (dt.getDay() < 6)) {
-
-                //            if ((8 < dt.getHours()) && (dt.getHours() < 17)) {
-
-                //                console.log("allowed date");
-                //                alert("allowed date");
-
-                //                // set value of input
-
-                //            }
-
-                //            else {
-
-                //                console.log("Denied! Bad date or time!");
-                //                alert("Denied! Bad date or time!");
-
-                //                // handle error --> use placholder as well?
-
-                //            }
-
-                //        }
-
-                //    }
-                //},
                 
                 weekends: ['01.01.2014', '02.01.2014', '03.01.2014', '04.01.2014', '05.01.2014', '06.01.2014'],
                 allowTimes: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
@@ -179,13 +82,14 @@
     </script>
     <script>
         function validateDateTime() {
-            //let dt = Date($('#Start').val());
 
             let testStartTime = new Date($('#Start').val()).getTime();
-            let testStartDate = new Date($('#Start').val()).getDate();
+            //let testStartDate = new Date($('#Start').val()).getDate();
+            let testStartDate = new Date($('#Start').val());
             let testStartHour = new Date($('#Start').val()).getHours();
             let testStartDay = new Date($('#Start').val()).getDay();
-            let currentDate = new Date().getDate();
+            //let currentDate = new Date().getDate();
+            let currentDate = new Date();
             let currentTime = new Date().getTime();
 
             if (testStartDate < currentDate) {
@@ -206,114 +110,6 @@
                 alert("Selected time must be between 8am and 5pm. Please select a time from the picker.");
                 $("#Start").datetimepicker('reset');
             }
-            
-
         }
     </script>
-    @*<script>
-        $(function () {
-            $("#datetimepicker_end").datetimepicker({
-                onGenerate: function (ct) {
-                    jQuery(this).find('.xdsoft_date.xdsoft_weekend')
-                        .addClass('xdsoft_disabled');
-                },
-                onShow: function (ct) {
-                    this.setOptions({
-                        minDate: jQuery('datetimepicker_start').val() ? jQuery('datetimepicker_start') : false
-                    })
-                },
-                weekends: ['01.01.2014', '02.01.2014', '03.01.2014', '04.01.2014', '05.01.2014', '06.01.2014'],
-                timepicker: true,
-                timepickerScrollbar:false
-            });
-        });
-    </script>*@
-    <!--<script>-->
-        @*const { start } = require("@popperjs/core");*@
-
-        <!--$(function () {
-            /**
-             * we declare a variable here so that we can use it within both our datepicker onChangeDateTime functions
-             * this var will hold the time of delivery + 1hour and will be used in the collection picker when both delivery and collection dates are the same
-             */
-            var setMinTime = "";
-
-            //Delivery - DatePicker1
-            $('#datetimepicker_start').datetimepicker({
-                inline: true,
-                formatDate: 'Y/m/d',
-                dayOfWeekStart: 0,
-                onGenerate: function (ct) {
-                    jQuery(this).find('.xdsoft_date.xdsoft_weekend')
-                        .addClass('xdsoft_disabled');
-                },
-                lang: 'en',
-                allowTimes: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'],
-                defaultSelect: false,
-                onChangeDateTime: function (startDateSelected) {
-
-                    //when we change Date in delivery picker, we set the collection picker to have this date as minimum
-                    $("#datetimepicker_end").datetimepicker({
-                        //val: startDateSelected
-                        value: startDateSelected
-                        //minDate: startDateSelected,
-                        //maxDate: startDateSelected
-                    });
-
-                    // get the time from delivery picker and add 1 hour, so we can set minTime in collection picker if needed
-                    var curTimePlusOneHour = startDateSelected.getHours() + 1;
-                    setMinTime = curTimePlusOneHour.toString() + ":00";
-                }
-            }); //End of delivery datepicker
-
-            //Collection - DatePicker2
-            $('#datetimepicker_end').datetimepicker({
-                inline: true,
-                formatDate: 'Y/m/d',
-                dayOfWeekStart: 0,
-                onGenerate: function (ct) {
-                    jQuery(this).find('.xdsoft_date.xdsoft_weekend')
-                        .addClass('xdsoft_disabled');
-                },
-                lang: 'en',
-                allowTimes: ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
-                defaultSelect: false,
-                onChangeDateTime: function (endDateSelected) {
-
-                    //set the maxDate of delivery picker according to our collection picked day
-                    $("#datetimepicker_start").datetimepicker({
-                        /*val: endDateSelected*/
-                        value: endDateSelected
-                        //minDate: endDateSelected,
-                        //maxDate: endDateSelected
-                    });
-
-                    //get the value of the dates without time
-
-                    //first we gate the value of the selected date
-                    var deliveryDate = $('#datetimepicker_start').val();
-                    //deliveryDate is in format "2015/08/06 14:08",and is a string so we use split to take only the date without the time
-                    var deliveryDateArr = deliveryDate.split(' ');
-
-                    // same as above
-                    var collectionDate = $('#datetimepicker_end').val();
-                    var collectionDateArr = collectionDate.split(' ');
-
-                    //if same date also set minTime
-                    if (deliveryDateArr[0] === collectionDateArr[0]) {
-                        $("#datetimepicker_end").datetimepicker({
-                            minTime: setMinTime
-                        });
-                    } else {
-                        $("#datetimepicker_end").datetimepicker({
-                            minTime: "09:00"
-                        });
-                    } //End of if..else..
-                }
-            }); //End of collection datepicker
-
-        });
-    </script>-->
-    
-
 }

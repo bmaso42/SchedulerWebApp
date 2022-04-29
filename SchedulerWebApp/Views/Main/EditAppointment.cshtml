@@ -12,92 +12,92 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>AppointmentModel</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <h4>AppointmentModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    @*<div class="form-group">
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.AppointmentID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AppointmentID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AppointmentID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.CustomerID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })*@
+                @Html.DropDownListFor(model => model.CustomerID, new SelectList(ViewBag.CustomerList, "Text", "Value"));
+                @*@Html.DropDownListFor(model => model.CustomerID, ViewBag.CustomerList as SelectList, new { @class = "form-control" }-->@*new SelectList(ViewBag.CustomerList, "Text", "Value")<!--);-->*@
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })*@
+                @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control", id = "Start", @readonly = "true", autocomplete = "off" } })
+            </div>
+        </div>
+        <div class="form-group" style="display:none">
+            @*set display:none to make field invisible - need AppointmentID to be unseen/uneditable, but valid to make CustomerProcessor update logic work*@
             @Html.LabelFor(model => model.AppointmentID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.AppointmentID, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.AppointmentID, "", new { @class = "text-danger" })
             </div>
-        </div>*@
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.CustomerID, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @*@Html.EditorFor(model => model.CustomerID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })*@
-            @Html.DropDownListFor(model => model.CustomerID, new SelectList(ViewBag.CustomerList, "Text", "Value"));
-            @*@Html.DropDownListFor(model => model.CustomerID, ViewBag.CustomerList as SelectList, new { @class = "form-control" }-->@*new SelectList(ViewBag.CustomerList, "Text", "Value")<!--);-->*@
         </div>
-    </div>
 
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.End, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" onclick="return validateDateTime()" />
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @*@Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })*@
-            @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control", id = "Start", autocomplete = "off" } })
         </div>
     </div>
-    <div class="form-group" style="display:none">
-        @*set display:none to make field invisible - need AppointmentID to be unseen/uneditable, but valid to make CustomerProcessor update logic work*@
-        @Html.LabelFor(model => model.AppointmentID, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.AppointmentID, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.AppointmentID, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.End, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
 
 <div>
@@ -114,28 +114,63 @@
         $(function () {
             $("#Start").datetimepicker({
                 //format: 'd/m/Y H:i',
-                //lang:'en',
+                closeOnWithoutClick: false,
+                closeOnDateSelect: false,
+                validateOnBlur: false,
+                minDate: '-1969/12/31',
+                defaultTime: '08:00',
+
                 onGenerate: function (ct) {
                     jQuery(this).find('.xdsoft_date.xdsoft_weekend')
                         .addClass('xdsoft_disabled');
                 },
-                onShow: function (ct) {
-                    this.setOptions({
-                        minDate: 0
-                        //minDate: 1//,
-                        //minTime: 0
-                    //    maxDate: jQuery('datetimepicker_end').val() ? jQuery('datetimepicker_end'):false
-                    })
-                },
-                onChangeDateTime: function () {
 
-                },
 
                 weekends: ['01.01.2014', '02.01.2014', '03.01.2014', '04.01.2014', '05.01.2014', '06.01.2014'],
                 allowTimes: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
                 timepicker: true,
                 timepickerScrollbar: false
+
             });
+
         });
+    </script>
+    <script>
+        function validateDateTime() {
+
+            let testStartTime = new Date($('#Start').val()).getTime();
+            //let testStartDate = new Date($('#Start').val()).getDate();
+            let testStartDate = new Date($('#Start').val());
+            let testStartHour = new Date($('#Start').val()).getHours();
+            let testStartDay = new Date($('#Start').val()).getDay();
+            //let currentDate = new Date().getDate();
+            let currentDate = new Date();
+            let currentTime = new Date().getTime();
+
+            if (testStartDate < currentDate) {
+                alert("Appointment start date cannot be before the current date.");
+                $("#Start").datetimepicker('reset');
+                return false;
+            }
+            if (testStartDate == currentDate) {
+                if (testStartTime < currentTime) {
+                    alert("Appointment start time cannot be before the current time.");
+                    $("#Start").datetimepicker('reset');
+                    return false;
+                }
+            }
+            if (!((0 < testStartDay) && (testStartDay < 6))) {
+                alert("Selected date must be between Monday through Friday.");
+                $("#Start").datetimepicker('reset');
+                return false;
+            }
+            if (((testStartHour < 8) || (testStartHour > 17))) {
+                alert("Selected time must be between 8am and 5pm. Please select a time from the picker.");
+                $("#Start").datetimepicker('reset');
+                return false;
+            } else {
+                return true;
+            }
+        }
     </script>
 }

@@ -41,30 +41,12 @@
 
 @foreach (var item in Model) {
     <tr>
-        @*<td>
-                @Html.DisplayFor(modelItem => item.AppointmentID)
-            </td>*@
-        @*<td>
-            @Html.DisplayFor(modelItem => item.CustomerID)
-        </td>*@
         <td>
-            @Html.DisplayFor(modelItem => item.FullName)@*Dude, no idea*@
+            @Html.DisplayFor(modelItem => item.FullName)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.FirstName) Commented out first and last name, CustomerID. Only using concatinated FullName field for ViewAppointments
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>*@
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Type)
-        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Start)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.End)
-        </td>*@
         <td>
             @Html.ActionLink("Edit", "EditAppointment", new { id=item.AppointmentID }) |
             @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
