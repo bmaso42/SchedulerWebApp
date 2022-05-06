@@ -94,7 +94,7 @@ CREATE TABLE `appointment` (
 -- `createdBy` varchar(40) NOT NULL,
 -- `lastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 -- `lastUpdateBy` varchar(40) NOT NULL,
-PRIMARY KEY (`appointmentId`),
+PRIMARY KEY (`appointmentId`)
 -- KEY `userId` (`userId`),
 -- KEY `appointment_ibfk_1` (`customerId`),
 -- CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`customerId`) REFERENCES `customer` (`customerId`),

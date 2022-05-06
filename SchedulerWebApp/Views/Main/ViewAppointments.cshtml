@@ -10,6 +10,13 @@
 <p>
     @Html.ActionLink("Create New", "CreateAppointment")
 </p>
+
+<form asp-controller="MainController" asp-action="ViewAppointments">
+    <p>
+        User Name: <input type="text" name="searchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 <table class="table">
     <tr>
         @*<th>

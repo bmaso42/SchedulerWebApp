@@ -132,8 +132,8 @@ namespace SchedulerWebApp.Controllers
 
             return View();
         }
-        
-        public ActionResult ViewAppointments()
+
+        public ActionResult ViewAppointments(string searchString)
         {
             ViewBag.Message = "List of Appointments";
             ViewBag.CustomerList = CustomerProcessor.CustomerList();
@@ -141,24 +141,72 @@ namespace SchedulerWebApp.Controllers
             var data = CustomerProcessor.LoadAppointments();
             List<AppointmentModel> appointments = new List<AppointmentModel>();
 
-            foreach (var row in data)
+            if (!String.IsNullOrEmpty(searchString))
             {
-                appointments.Add(new AppointmentModel
+                //data = (List<DataLibrary.Models.AppointmentModel>)data.Where(s => s.FirstName.Contains(searchString).ToList());
+                foreach (var row in data.Where(s => s.FirstName.ToLower().Contains(searchString.ToLower()) || s.LastName.ToLower().Contains(searchString.ToLower())))
                 {
-                    AppointmentID = row.AppointmentID,
-                    CustomerID = row.CustomerID,
-                    FirstName = row.FirstName,
-                    LastName = row.LastName,
-                    FullName = row.FirstName + " " + row.LastName, //concat field to use for dropdown along with CustomerID
-                    //Type = row.Type,
-                    Start = row.Start
-                    //End = row.End
-                });
+                    appointments.Add(new AppointmentModel
+                    {
+                        AppointmentID = row.AppointmentID,
+                        CustomerID = row.CustomerID,
+                        FirstName = row.FirstName,
+                        LastName = row.LastName,
+                        FullName = row.FirstName + " " + row.LastName, //concat field to use for dropdown along with CustomerID
+                                                                       //Type = row.Type,
+                        Start = row.Start
+                        //End = row.End
+                    });
+                }
             }
+            else
+            {
 
+                foreach (var row in data)
+                {
+                    appointments.Add(new AppointmentModel
+                    {
+                        AppointmentID = row.AppointmentID,
+                        CustomerID = row.CustomerID,
+                        FirstName = row.FirstName,
+                        LastName = row.LastName,
+                        FullName = row.FirstName + " " + row.LastName, //concat field to use for dropdown along with CustomerID
+                                                                       //Type = row.Type,
+                        Start = row.Start
+                        //End = row.End
+                    });
+                }
+            }
 
             return View(appointments);
         }
+        // Commented out section so I can test Search functionality
+        //public ActionResult ViewAppointments()
+        //{
+        //    ViewBag.Message = "List of Appointments";
+        //    ViewBag.CustomerList = CustomerProcessor.CustomerList();
+
+        //    var data = CustomerProcessor.LoadAppointments();
+        //    List<AppointmentModel> appointments = new List<AppointmentModel>();
+
+        //    foreach (var row in data)
+        //    {
+        //        appointments.Add(new AppointmentModel
+        //        {
+        //            AppointmentID = row.AppointmentID,
+        //            CustomerID = row.CustomerID,
+        //            FirstName = row.FirstName,
+        //            LastName = row.LastName,
+        //            FullName = row.FirstName + " " + row.LastName, //concat field to use for dropdown along with CustomerID
+        //            //Type = row.Type,
+        //            Start = row.Start
+        //            //End = row.End
+        //        });
+        //    }
+
+
+        //    return View(appointments);
+        //}
 
         [NonAction]
         public SelectList ToSelectList(DataTable table/*, string valueField, string textField*/) //helper function to combine first+last name from datatable, used to populate dropdownlist
