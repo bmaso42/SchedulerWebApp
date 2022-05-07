@@ -1,1 +1,6 @@
 Main/Index/Home needs to be changed into something
+~~DONE~~ Add 'Search' link along the top of Main Controller layout
+
+MainController.cs
+    - redirect ReportSearch() to ReportResult(), sending result of CustomerProcessor.CreateReport(start, end)
+    - create a View for ReportResult(), similar to ViewAppointments() 

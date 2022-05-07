@@ -125,7 +125,7 @@ namespace SchedulerWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-            int recordsDeleted = CustomerProcessor.DeleteCustomer(id);
+                int recordsDeleted = CustomerProcessor.DeleteCustomer(id);
 
                 return RedirectToAction("Index");
             }
@@ -161,7 +161,6 @@ namespace SchedulerWebApp.Controllers
             }
             else
             {
-
                 foreach (var row in data)
                 {
                     appointments.Add(new AppointmentModel
@@ -179,6 +178,33 @@ namespace SchedulerWebApp.Controllers
             }
 
             return View(appointments);
+        }
+
+        public ActionResult ReportSearch()
+        {
+            ViewBag.Message = "Search For Appointments";
+
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ReportSearch(DateTime start, DateTime end)
+        {
+            if (ModelState.IsValid)
+            {
+                int reportCreated = CustomerProcessor.CreateReport(start, end);
+
+                return RedirectToAction("ReportResult");
+            }
+
+            return View();
+        }
+
+        public ActionResult ReportResult(DateTime start, DateTime end)
+        {
+            ViewBag.Message = "Report of Appointments";
+
+            return View();
         }
         // Commented out section so I can test Search functionality
         //public ActionResult ViewAppointments()

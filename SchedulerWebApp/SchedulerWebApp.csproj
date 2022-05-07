@@ -266,6 +266,7 @@
     <Content Include="Views\Main\CreateAppointment.cshtml" />
     <Content Include="Views\Main\DeleteAppointment.cshtml" />
     <Content Include="Views\Main\EditAppointment.cshtml" />
+    <Content Include="Views\Main\ReportSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

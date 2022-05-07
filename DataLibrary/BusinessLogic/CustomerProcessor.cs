@@ -141,6 +141,22 @@ namespace DataLibrary.BusinessLogic
 
             return MySqlDataAccess.GetDataTable(sql);
         }
+
+        public static List<AppointmentModel> CreateReport(DateTime start, DateTime end)
+        {
+            string sql = @"SELECT a.appointmentId, a.customerId, b.FirstName, b.LastName, a.start
+                            FROM appointment as a
+                            INNER JOIN customer as b
+                            on a.customerId = b.customerId;";
+
+            //@"SELECT a.appointmentId, a.customerId, b.FirstName, b.LastName, a.type, a.start, a.end
+            //                FROM appointment as a
+            //                INNER JOIN customer as b
+            //                on a.customerId = b.customerId;";
+
+            return MySqlDataAccess.LoadData<AppointmentModel>(sql);
+        }
+
     }
     
 }
