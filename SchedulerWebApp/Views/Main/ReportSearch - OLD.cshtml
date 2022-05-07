@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Search for Appointments";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Search for Appointments by Date Range</h2>
+
+@*@using (Html.BeginForm("ReportResult", "MainController", FormMethod.Post, 
+    new { start = StartPicker, end = EndPicker }))*@
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <br />
+    <div class="form-group">
+        <label>Select beginning of date range:</label>
+        <br />
+        <input id="StartPicker" type="text" >
+    </div>
+    <br />
+    <div class="form-group">
+        <label>Select end of date range:</label>
+        <br />
+        <input id="EndPicker" type="text">
+    </div>
+    <br />
+    <div class="form-group">
+        <input type="submit" value="Search" class="btn btn-default" onclick="return validateDateTime" />
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<link rel="stylesheet" type="text/css" href="/jquery.datetimepicker.css" />
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        jQuery("#StartPicker").datetimepicker();
+    </script>
+
+    <script>
+        $(function () {
+            $("#EndPicker").datetimepicker({
+
+            });
+        });
+    </script>
+
+    <script>
+        function validateDateTime() {
+            if (true) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+}

@@ -192,7 +192,8 @@ namespace SchedulerWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                int reportCreated = CustomerProcessor.CreateReport(start, end);
+                //int reportCreated =
+                var data = CustomerProcessor.CreateReport(start, end);
 
                 return RedirectToAction("ReportResult");
             }
