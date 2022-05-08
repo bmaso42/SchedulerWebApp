@@ -188,24 +188,73 @@ namespace SchedulerWebApp.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ReportSearch(DateTime start, DateTime end)
+        public ActionResult ReportSearch( ReportModel model /*DateTime start, DateTime end*/)
         {
+            ReportModel reportModel = new ReportModel();
+
+            var data = CustomerProcessor.LoadAppointments();
+            List<AppointmentModel> appointments = new List<AppointmentModel>();
+
             if (ModelState.IsValid)
             {
                 //int reportCreated =
-                var data = CustomerProcessor.CreateReport(start, end);
+                //var data = CustomerProcessor.CreateReport(start, end);
+                DateTime start = model.Beginning;
+                DateTime end = model.End;
 
-                return RedirectToAction("ReportResult");
+                foreach (var row in data.Where(s => s.Start >= start && s.Start <= end))
+                {
+                    appointments.Add(new AppointmentModel
+                    {
+                        AppointmentID = row.AppointmentID,
+                        CustomerID = row.CustomerID,
+                        FirstName = row.FirstName,
+                        LastName = row.LastName,
+                        FullName = row.FirstName + " " + row.LastName, //concat field to use for dropdown along with CustomerID
+                                                                       //Type = row.Type,
+                        Start = row.Start
+                        //End = row.End
+                    });
+                }
+
+                appointments = appointments.OrderBy(s => s.Start).ToList();
+
+                return View("ReportResult", appointments);
+
+                //return RedirectToAction("ReportResult", new { reportModel = reportModel });
             }
 
             return View();
         }
 
-        public ActionResult ReportResult(DateTime start, DateTime end)
+        public ActionResult ReportResult(List<AppointmentModel> appointments)
         {
             ViewBag.Message = "Report of Appointments";
 
-            return View();
+            //var data = CustomerProcessor.LoadAppointments();
+            //List<AppointmentModel> appointments = new List<AppointmentModel>();
+
+            //DateTime start = reportModel.Start;
+            //DateTime end = reportModel.End;
+
+            
+            ////foreach (var row in data.Where(s => s.FirstName.ToLower().Contains(searchString.ToLower()) || s.LastName.ToLower().Contains(searchString.ToLower())))
+            //foreach (var row in data.Where(s => s.Start >= start && s.Start <= end))
+            //{
+            //    appointments.Add(new AppointmentModel
+            //    {
+            //        AppointmentID = row.AppointmentID,
+            //        CustomerID = row.CustomerID,
+            //        FirstName = row.FirstName,
+            //        LastName = row.LastName,
+            //        FullName = row.FirstName + " " + row.LastName, //concat field to use for dropdown along with CustomerID
+            //                                                       //Type = row.Type,
+            //        Start = row.Start
+            //        //End = row.End
+            //    });
+            //}
+
+            return View(appointments);
         }
         // Commented out section so I can test Search functionality
         //public ActionResult ViewAppointments()

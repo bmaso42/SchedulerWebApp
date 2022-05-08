@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace DataLibrary.BusinessLogic
 {
     public static class CustomerProcessor
@@ -142,7 +143,7 @@ namespace DataLibrary.BusinessLogic
             return MySqlDataAccess.GetDataTable(sql);
         }
 
-        public static List<AppointmentModel> CreateReport(DateTime start, DateTime end)
+        public static List<AppointmentModel> CreateReport()
         {
             string sql = @"SELECT a.appointmentId, a.customerId, b.FirstName, b.LastName, a.start
                             FROM appointment as a
