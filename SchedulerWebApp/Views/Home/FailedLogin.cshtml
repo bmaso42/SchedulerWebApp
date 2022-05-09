@@ -1,7 +1,12 @@
 ﻿
 @{
-    ViewBag.Title = "FailedLogin";
+    ViewBag.Title = "Login Failed";
 }
 
-<h2>FailedLogin</h2>
+<h2>Login Failed</h2>
 
+<h4>No matching user name and password was found.</h4>
+
+<div>
+    @Html.ActionLink("Return to Login", "Index")
+</div>

@@ -126,6 +126,7 @@ namespace SchedulerWebApp.Controllers
             if (ModelState.IsValid)
             {
                 int recordsDeleted = CustomerProcessor.DeleteCustomer(id);
+                int appointmentsDeleted = CustomerProcessor.DeleteCustomerFromAppointments(id);
 
                 return RedirectToAction("Index");
             }
@@ -176,6 +177,8 @@ namespace SchedulerWebApp.Controllers
                     });
                 }
             }
+
+            appointments = appointments.OrderBy(s => s.Start).ToList();
 
             return View(appointments);
         }

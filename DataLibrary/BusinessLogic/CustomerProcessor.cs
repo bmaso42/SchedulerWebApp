@@ -57,6 +57,19 @@ namespace DataLibrary.BusinessLogic
             return MySqlDataAccess.SaveData(sql, data);
         }
 
+        public static int DeleteCustomerFromAppointments(int customer_ID)
+        {
+            CustomerModel data = new CustomerModel
+            {
+                customerId = customer_ID,
+                //FirstName = firstName
+            };
+            //string sql = @"delete from appointment where appointmentId in (select distinct appointmentId from appointment where customerId = @customerId);";
+            string sql = @"delete from appointment where customerId = @customerId";
+
+            return MySqlDataAccess.SaveData(sql, data);
+        }
+
         public static int CreateAppointment(int CustomerID, /*string FirstName, string LastName,*/ DateTime Start)
         ///*int AppointmentID*/int CustomerID, string FirstName, string LastName, string Type, DateTime Start, DateTime End)
         {
