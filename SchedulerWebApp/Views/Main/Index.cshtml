@@ -4,6 +4,18 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Scheduling Application Home Page</h2>
 
-<h1>We're logged in, bois!</h1>
+<h3>Select a page:</h3>
+
+<div>
+    @Html.ActionLink("View All Customers", "ViewCustomers")
+</div>
+
+<div>
+    @Html.ActionLink("View All Appointments", "ViewAppointments")
+</div>
+
+<div>
+    @Html.ActionLink("Create A Report", "ReportSearch")
+</div>

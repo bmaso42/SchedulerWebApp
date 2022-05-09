@@ -1,18 +1,18 @@
 ﻿@model SchedulerWebApp.Models.ReportModel
 
 @{
-    ViewBag.Title = "ReportSearch";
+    ViewBag.Title = "Create a New Report";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>ReportSearch</h2>
+<h2>Create a New Report</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>ReportModel</h4>
+        <h4></h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -31,64 +31,16 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.AppointmentID, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.AppointmentID, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.AppointmentID, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.CustomerID, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.CustomerID, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" onclick="validateDateTime()" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Home Page", "Index")
 </div>
 
 <link rel="stylesheet" type="text/css" href="/jquery.datetimepicker.css" />
@@ -97,24 +49,40 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-        jQuery("#StartPicker").datetimepicker();
+        jQuery("#StartPicker").datetimepicker({
+            closeOnWithoutClick: false,
+            closeOnDateSelect: true,
+            validateOnBlur: false,
+            defaultTime: '00:00',
+        });
     </script>
 
     <script>
         $(function () {
             $("#EndPicker").datetimepicker({
-
+                closeOnWithoutClick: false,
+                closeOnDateSelect: true,
+                validateOnBlur: false,
+                defaultTime: '23:59',
             });
         });
     </script>
 
     <script>
         function validateDateTime() {
-            if (true) {
-                return true;
-            } else {
-                return false;
+            let StartPicker = new Date($('#StartPicker').val());
+            let EndPicker = new Date($('#EndPicker').val());
+
+            if (StartPicker > EndPicker) {
+                alert("Selected Start Date must be before selected End Date.");
+                $("#StartPicker").datetimepicker('reset');
+                $("#StartPicker").datetimepicker('close');
+                $("#EndPicker").datetimepicker('reset');
+                $("#EndPicker").datetimepicker('close');
             }
+            //} else {
+            //    return false;
+            //}
         }
     </script>
 }

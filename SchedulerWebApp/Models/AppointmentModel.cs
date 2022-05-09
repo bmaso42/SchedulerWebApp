@@ -11,6 +11,7 @@ namespace SchedulerWebApp.Models
         //set to be invisible in ViewPage - don't want it seen by user, but required for Update/Delete logic
         public int AppointmentID{ get; set; }
 
+        [Display(Name = "Customer Name")]
         public int CustomerID { get; set; }
         
         [Display(Name = "First Name")]
@@ -19,7 +20,7 @@ namespace SchedulerWebApp.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Display(Name = " Customer Name")]
+        [Display(Name = "Customer Name")]
         public string FullName { get; set; }
         
         //[Display(Name = "Appointment Type")]
