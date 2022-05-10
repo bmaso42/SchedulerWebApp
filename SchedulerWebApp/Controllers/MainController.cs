@@ -197,6 +197,7 @@ namespace SchedulerWebApp.Controllers
 
             var data = CustomerProcessor.LoadAppointments();
             List<AppointmentModel> appointments = new List<AppointmentModel>();
+            ViewBag.Timestamp = DateTime.Now;
 
             if (ModelState.IsValid)
             {
@@ -233,6 +234,7 @@ namespace SchedulerWebApp.Controllers
         public ActionResult ReportResult(List<AppointmentModel> appointments)
         {
             ViewBag.Message = "Report of Appointments";
+            ViewBag.Timestamp = "SAMPLE STRING";//DateTime.Now.ToString();
 
             //var data = CustomerProcessor.LoadAppointments();
             //List<AppointmentModel> appointments = new List<AppointmentModel>();
