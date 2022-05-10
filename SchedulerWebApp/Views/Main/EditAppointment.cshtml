@@ -86,7 +86,7 @@
                 closeOnWithoutClick: false,
                 closeOnDateSelect: false,
                 validateOnBlur: false,
-                minDate: '-1969/12/31',
+                minDate: 0, //'-1969/12/31',
                 defaultTime: '08:00',
 
                 onGenerate: function (ct) {
@@ -117,7 +117,7 @@
             let currentTime = new Date().getTime();
 
             if (testStartDate < currentDate) {
-                alert("Appointment start date cannot be before the current date.");
+                alert("Appointment start date and time cannot be before the current date and time.");
                 $("#Start").datetimepicker('reset');
                 return false;
             }
