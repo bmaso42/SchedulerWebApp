@@ -58,12 +58,13 @@ namespace SchedulerWebApp.Controllers
 
             if (dr.Read())
             {
-
+                Console.WriteLine("Username and password match.");
                 con.Close();
                 return RedirectToAction("Index", "Main");
             }
             else
             {
+                Console.WriteLine("Username and password DO NOT match.");
                 con.Close();
                 return View("FailedLogin");
             }
