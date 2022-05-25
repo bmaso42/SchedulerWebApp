@@ -16,7 +16,6 @@ namespace DataLibrary.BusinessLogic
         {
             CustomerModel data = new CustomerModel
             {
-                //customerId = customerId,
                 FirstName = firstName,
                 LastName = lastName,
                 EmailAddress = emailAddress
@@ -49,7 +48,6 @@ namespace DataLibrary.BusinessLogic
             CustomerModel data = new CustomerModel
             {
                 customerId = customer_ID,
-                //FirstName = firstName
             };
 
             string sql = @"delete from customer where customerId = @customerId;";
@@ -62,36 +60,22 @@ namespace DataLibrary.BusinessLogic
             CustomerModel data = new CustomerModel
             {
                 customerId = customer_ID,
-                //FirstName = firstName
             };
-            //string sql = @"delete from appointment where appointmentId in (select distinct appointmentId from appointment where customerId = @customerId);";
             string sql = @"delete from appointment where customerId = @customerId";
 
             return MySqlDataAccess.SaveData(sql, data);
         }
 
-        public static int CreateAppointment(int CustomerID, /*string FirstName, string LastName,*/ DateTime Start)
-        ///*int AppointmentID*/int CustomerID, string FirstName, string LastName, string Type, DateTime Start, DateTime End)
+        public static int CreateAppointment(int CustomerID, DateTime Start)
         {
             AppointmentModel data = new AppointmentModel
             {
-                //AppointmentID = AppointmentID,
                 CustomerID = CustomerID,
-                //FirstName = FirstName,
-                //LastName = LastName,
-                //Type = null,
                 Start = Start,
-                //End = End
             };
 
             string sql = @"Insert into appointment (CustomerID, Start)
                           values (@CustomerID, @Start);";
-
-            //@"Insert into appointment (CustomerID, FirstName, LastName, Start)
-            //              values (@CustomerID, @FirstName, @LastName, @Start);";
-
-            //@"Insert into appointment (CustomerID, FirstName, LastName, Type, Start, End)
-            //              values (@CustomerID, @FirstName, @LastName, @Type, @Start, @End);";
 
             return MySqlDataAccess.SaveData(sql, data);
         }
@@ -101,16 +85,10 @@ namespace DataLibrary.BusinessLogic
             {
                 AppointmentID = AppointmentID,
                 CustomerID = CustomerID,
-                //FirstName = FirstName,
-                //LastName = LastName,
-                //Type = null,
                 Start = Start,
-                //End = End
             };
 
             string sql = @"update appointment set customerID = @CustomerID, start = @Start WHERE appointmentID = @AppointmentID";
-            //@"Update customer set Firstname = @FirstName, LastName = @LastName, EmailAddress = @EmailAddress
-            //                WHERE customerId = @customerId;"
 
             return MySqlDataAccess.SaveData(sql, data);
         }
@@ -120,7 +98,6 @@ namespace DataLibrary.BusinessLogic
             AppointmentModel data = new AppointmentModel
             {
                 AppointmentID = appointment_ID
-                //FirstName = firstName
             };
 
             string sql = @"delete from appointment where appointmentId = @AppointmentID;";
@@ -142,11 +119,6 @@ namespace DataLibrary.BusinessLogic
                             INNER JOIN customer as b
                             on a.customerId = b.customerId;";
 
-            //@"SELECT a.appointmentId, a.customerId, b.FirstName, b.LastName, a.type, a.start, a.end
-            //                FROM appointment as a
-            //                INNER JOIN customer as b
-            //                on a.customerId = b.customerId;";
-
             return MySqlDataAccess.LoadData<AppointmentModel>(sql);
         }
         public static DataTable CustomerList()
@@ -162,11 +134,6 @@ namespace DataLibrary.BusinessLogic
                             FROM appointment as a
                             INNER JOIN customer as b
                             on a.customerId = b.customerId;";
-
-            //@"SELECT a.appointmentId, a.customerId, b.FirstName, b.LastName, a.type, a.start, a.end
-            //                FROM appointment as a
-            //                INNER JOIN customer as b
-            //                on a.customerId = b.customerId;";
 
             return MySqlDataAccess.LoadData<AppointmentModel>(sql);
         }

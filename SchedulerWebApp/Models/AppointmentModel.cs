@@ -22,16 +22,9 @@ namespace SchedulerWebApp.Models
 
         [Display(Name = "Customer Name")]
         public string FullName { get; set; }
-        
-        //[Display(Name = "Appointment Type")]
-        //public string Type { get; set; }
 
         [Display(Name = "Appointment Start")]
         [DataType(DataType.DateTime)]
         public DateTime Start { get; set; }
-
-        //[Display(Name = "Appointment End")]
-        //[DataType(DataType.DateTime)]
-        //public DateTime End { get; set; }
     }
 }

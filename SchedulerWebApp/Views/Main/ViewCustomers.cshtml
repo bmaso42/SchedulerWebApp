@@ -21,9 +21,6 @@
         <th>
             @Html.DisplayNameFor(model => model.EmailAddress)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.ConfirmEmail)
-        </th>*@
         <th></th>
     </tr>
 
@@ -38,12 +35,8 @@
         <td>
             @Html.DisplayFor(modelItem => item.EmailAddress)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.ConfirmEmail)
-        </td>*@
         <td>
             @Html.ActionLink("Edit", "EditCustomer", new { id=item.customerId }, null) |
-            @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
             @Html.ActionLink("Delete", "DeleteCustomer", new { id=item.customerId })
         </td>
     </tr>

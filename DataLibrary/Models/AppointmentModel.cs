@@ -12,8 +12,6 @@ namespace DataLibrary.Models
         public int CustomerID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        //public string Type { get; set; }
         public DateTime Start { get; set; }
-        //public DateTime End { get; set; }
     }
 }

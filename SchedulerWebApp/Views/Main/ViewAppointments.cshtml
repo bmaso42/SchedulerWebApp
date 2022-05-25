@@ -19,30 +19,12 @@
 </form>
 <table class="table">
     <tr>
-        @*<th>
-            @Html.DisplayNameFor(model => model.AppointmentID)
-        </th>*@
-        @*<th>
-            @Html.DisplayNameFor(model => model.CustomerID)
-        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.FullName)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>*@
-        @*<th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>*@
-        @*<th>
-            @Html.DisplayNameFor(model => model.Type)
-        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Start)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.End)
-        </th>*@
         <th></th>
     </tr>
 
@@ -56,7 +38,6 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "EditAppointment", new { id=item.AppointmentID }) |
-            @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
             @Html.ActionLink("Delete", "DeleteAppointment", new { id=item.AppointmentID })
         </td>
     </tr>

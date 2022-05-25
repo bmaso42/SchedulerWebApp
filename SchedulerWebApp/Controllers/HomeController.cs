@@ -11,7 +11,6 @@ namespace SchedulerWebApp.Controllers
     public class HomeController : Controller
     {
         MySqlConnection con = new MySqlConnection();
-        //MySqlCommand cmd = new MySqlCommand();
         MySqlDataReader dr;
 
         [HttpGet]
@@ -42,11 +41,6 @@ namespace SchedulerWebApp.Controllers
         [HttpPost]
         public ActionResult Verify(Login login)
         {
-            //connectionString();
-            //con.Open();
-            //cmd.Connection = con;
-            //cmd.CommandText = "select * from user where userName='"+login.Name+"' and password='"+login.Password+"'";
-            //dr = cmd.ExecuteReader();
             connectionString();
             con.Open();
 

@@ -44,14 +44,6 @@
             @Html.DisplayFor(model => model.ConfirmEmail)
         </dd>
 
-        @*<dt>
-            @Html.DisplayNameFor(model => model.customerId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.customerId)
-        </dd>*@
-
     </dl>
 
     @using (Html.BeginForm("DeleteCustomer", "Main")) {
@@ -60,8 +52,6 @@
         @Html.HiddenFor(m => m.FirstName, new { @id = "first" })
 
         <div class="form-group no-color">
-            @*<input type="hidden" name="model" value=model/>*@
-            @*<input type="hidden" name="firstName" value=model.FirstName/>*@
             <input type="submit" value="Delete" class="btn btn-default"/> |
             @Html.ActionLink("Back to List", "ViewCustomers")
         </div>

@@ -14,7 +14,6 @@ namespace SchedulerWebApp.Controllers
 {
     public class MainController : Controller
     {
-        // GET: Main
         public ActionResult Index()
         {
             return View();
@@ -68,7 +67,7 @@ namespace SchedulerWebApp.Controllers
             var data = CustomerProcessor.LoadCustomers();
             List<CustomerModel> customers = new List<CustomerModel>();
 
-            CustomerModel selectedCustomer = new CustomerModel();//data.SingleOrDefault(x => x.customerId == selectedIndex)
+            CustomerModel selectedCustomer = new CustomerModel();
             foreach(var row in data)
             {
                 if (row.customerId == id)
@@ -144,7 +143,6 @@ namespace SchedulerWebApp.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                //data = (List<DataLibrary.Models.AppointmentModel>)data.Where(s => s.FirstName.Contains(searchString).ToList());
                 foreach (var row in data.Where(s => s.FirstName.ToLower().Contains(searchString.ToLower()) || s.LastName.ToLower().Contains(searchString.ToLower())))
                 {
                     appointments.Add(new AppointmentModel
@@ -154,9 +152,7 @@ namespace SchedulerWebApp.Controllers
                         FirstName = row.FirstName,
                         LastName = row.LastName,
                         FullName = row.FirstName + " " + row.LastName, //concat field to use for dropdown along with CustomerID
-                                                                       //Type = row.Type,
                         Start = row.Start
-                        //End = row.End
                     });
                 }
             }
@@ -171,9 +167,7 @@ namespace SchedulerWebApp.Controllers
                         FirstName = row.FirstName,
                         LastName = row.LastName,
                         FullName = row.FirstName + " " + row.LastName, //concat field to use for dropdown along with CustomerID
-                                                                       //Type = row.Type,
                         Start = row.Start
-                        //End = row.End
                     });
                 }
             }
@@ -191,7 +185,7 @@ namespace SchedulerWebApp.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ReportSearch( ReportModel model /*DateTime start, DateTime end*/)
+        public ActionResult ReportSearch( ReportModel model)
         {
             ReportModel reportModel = new ReportModel();
 
@@ -201,8 +195,6 @@ namespace SchedulerWebApp.Controllers
 
             if (ModelState.IsValid)
             {
-                //int reportCreated =
-                //var data = CustomerProcessor.CreateReport(start, end);
                 DateTime start = model.Beginning;
                 DateTime end = model.End;
 
@@ -215,17 +207,13 @@ namespace SchedulerWebApp.Controllers
                         FirstName = row.FirstName,
                         LastName = row.LastName,
                         FullName = row.FirstName + " " + row.LastName, //concat field to use for dropdown along with CustomerID
-                                                                       //Type = row.Type,
                         Start = row.Start
-                        //End = row.End
                     });
                 }
 
                 appointments = appointments.OrderBy(s => s.Start).ToList();
 
                 return View("ReportResult", appointments);
-
-                //return RedirectToAction("ReportResult", new { reportModel = reportModel });
             }
 
             return View();
@@ -234,63 +222,13 @@ namespace SchedulerWebApp.Controllers
         public ActionResult ReportResult(List<AppointmentModel> appointments)
         {
             ViewBag.Message = "Report of Appointments";
-            ViewBag.Timestamp = "SAMPLE STRING";//DateTime.Now.ToString();
-
-            //var data = CustomerProcessor.LoadAppointments();
-            //List<AppointmentModel> appointments = new List<AppointmentModel>();
-
-            //DateTime start = reportModel.Start;
-            //DateTime end = reportModel.End;
-
-            
-            ////foreach (var row in data.Where(s => s.FirstName.ToLower().Contains(searchString.ToLower()) || s.LastName.ToLower().Contains(searchString.ToLower())))
-            //foreach (var row in data.Where(s => s.Start >= start && s.Start <= end))
-            //{
-            //    appointments.Add(new AppointmentModel
-            //    {
-            //        AppointmentID = row.AppointmentID,
-            //        CustomerID = row.CustomerID,
-            //        FirstName = row.FirstName,
-            //        LastName = row.LastName,
-            //        FullName = row.FirstName + " " + row.LastName, //concat field to use for dropdown along with CustomerID
-            //                                                       //Type = row.Type,
-            //        Start = row.Start
-            //        //End = row.End
-            //    });
-            //}
+            ViewBag.Timestamp = "SAMPLE STRING";
 
             return View(appointments);
         }
-        // Commented out section so I can test Search functionality
-        //public ActionResult ViewAppointments()
-        //{
-        //    ViewBag.Message = "List of Appointments";
-        //    ViewBag.CustomerList = CustomerProcessor.CustomerList();
-
-        //    var data = CustomerProcessor.LoadAppointments();
-        //    List<AppointmentModel> appointments = new List<AppointmentModel>();
-
-        //    foreach (var row in data)
-        //    {
-        //        appointments.Add(new AppointmentModel
-        //        {
-        //            AppointmentID = row.AppointmentID,
-        //            CustomerID = row.CustomerID,
-        //            FirstName = row.FirstName,
-        //            LastName = row.LastName,
-        //            FullName = row.FirstName + " " + row.LastName, //concat field to use for dropdown along with CustomerID
-        //            //Type = row.Type,
-        //            Start = row.Start
-        //            //End = row.End
-        //        });
-        //    }
-
-
-        //    return View(appointments);
-        //}
 
         [NonAction]
-        public SelectList ToSelectList(DataTable table/*, string valueField, string textField*/) //helper function to combine first+last name from datatable, used to populate dropdownlist
+        public SelectList ToSelectList(DataTable table) //helper function to combine first+last name from datatable, used to populate dropdownlist
         {
             List<SelectListItem> list = new List<SelectListItem>();
 
@@ -310,13 +248,7 @@ namespace SchedulerWebApp.Controllers
         {
             ViewBag.Message = "Create a New Appointment";
             ViewBag.CustomerList = ToSelectList(CustomerProcessor.CustomerList());
-            //DataTable dt = CustomerProcessor.CustomerList();
-            //SelectList SelectCustomerList;// = new SelectList;
-            //foreach (DataRow row in dt.Rows)
-            //{
-
-            //}
-
+ 
             return View();
         }
         [HttpPost]
@@ -327,11 +259,7 @@ namespace SchedulerWebApp.Controllers
             {
                 int recordsCreated = CustomerProcessor.CreateAppointment(
                     model.CustomerID,
-                    //model.FirstName = null,
-                    //model.LastName = null,
-                    //model.Type = null,
-                    model.Start
-                    /*model.End*/);
+                    model.Start);
 
                 return RedirectToAction("ViewAppointments");
             }
@@ -351,12 +279,8 @@ namespace SchedulerWebApp.Controllers
                 if (row.AppointmentID == id)
                 {
                     selectedAppointment.AppointmentID = row.AppointmentID;
-                    //selectedAppointment.FirstName = row.FirstName;
-                    //selectedAppointment.LastName = row.LastName;
                     selectedAppointment.CustomerID = row.CustomerID;
-
-                    selectedAppointment.FullName = row.FirstName + " " + row.LastName;
-                    
+                    selectedAppointment.FullName = row.FirstName + " " + row.LastName;                   
                     selectedAppointment.Start= row.Start;
                 }
             }
@@ -384,7 +308,7 @@ namespace SchedulerWebApp.Controllers
             var data = CustomerProcessor.LoadAppointments();
             List<AppointmentModel> appointments = new List<AppointmentModel>();
 
-            AppointmentModel selectedAppointment = new AppointmentModel();//data.SingleOrDefault(x => x.customerId == selectedIndex)
+            AppointmentModel selectedAppointment = new AppointmentModel();
             foreach (var row in data)
             {
                 if (row.AppointmentID == id)
@@ -394,7 +318,6 @@ namespace SchedulerWebApp.Controllers
                     selectedAppointment.FirstName = row.FirstName;
                     selectedAppointment.LastName = row.LastName;
                     selectedAppointment.Start = row.Start;
-                    //selectedAppointment.ConfirmEmail = row.EmailAddress;
                 }
             }
             return View(selectedAppointment);
@@ -408,11 +331,7 @@ namespace SchedulerWebApp.Controllers
                 int recordsCreated = CustomerProcessor.UpdateAppointment(
                     model.AppointmentID,
                     model.CustomerID,
-                    //model.FirstName = null,
-                    //model.LastName = null,
-                    //model.Type = null,
-                    model.Start
-                    /*model.End*/);
+                    model.Start);
 
                 return RedirectToAction("ViewAppointments");
             }
