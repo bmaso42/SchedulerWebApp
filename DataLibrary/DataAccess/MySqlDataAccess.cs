@@ -14,7 +14,6 @@ namespace DataLibrary.DataAccess
     {
         public static string GetConnectionString(string connectionName = "C868DBClient")
         {
-            //return ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
             return "server=localhost;user=sqlUser;database=client_schedule;port=3306;password=Passw0rd!;";
         }
 
