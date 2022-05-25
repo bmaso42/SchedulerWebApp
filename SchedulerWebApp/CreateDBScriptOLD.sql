@@ -1,13 +1,7 @@
-use client_schedule;
+
 --
 -- Script to drop prior tables 
 --
-DROP TABLE IF EXISTS `address`;
-DROP TABLE IF EXISTS `appointment`;
-DROP TABLE IF EXISTS `city`;
-DROP TABLE IF EXISTS `country`;
-DROP TABLE IF EXISTS `customer`;
-DROP TABLE IF EXISTS `user`;
 
 SET FOREIGN_KEY_CHECKS = 0;
 SET @tarray = NULL;
@@ -73,8 +67,9 @@ CREATE TABLE `customer` (
   `LastName` varchar(50) NOT NULL,
   `EmailAddress` varchar(50),
 
-  PRIMARY KEY (`customerId`)
-
+  PRIMARY KEY (`customerId`)--,
+--  KEY `addressId` (`addressId`),
+  --CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`addressId`) REFERENCES `address` (`addressId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 --
@@ -86,7 +81,24 @@ DROP TABLE IF EXISTS `appointment`;
 CREATE TABLE `appointment` (
 `appointmentId` int(10) NOT NULL AUTO_INCREMENT,
 `customerId` int(10) NOT NULL,
+`userId` int(11) NOT NULL,
+-- `title` varchar(255) NOT NULL,
+-- `description` text NOT NULL,
+-- `location` text NOT NULL,
+-- `contact` text NOT NULL,
+`type` text NOT NULL,
+-- `url` varchar(255) NOT NULL,
 `start` datetime NOT NULL,
+`end` datetime NOT NULL,
+-- `createDate` datetime NOT NULL,
+-- `createdBy` varchar(40) NOT NULL,
+-- `lastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+-- `lastUpdateBy` varchar(40) NOT NULL,
 PRIMARY KEY (`appointmentId`)
-)
+-- KEY `userId` (`userId`),
+-- KEY `appointment_ibfk_1` (`customerId`),
+-- CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`customerId`) REFERENCES `customer` (`customerId`),
+-- CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`)
+)-- ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+
 
